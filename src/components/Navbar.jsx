@@ -1,4 +1,4 @@
-function Navbar({title = 'Luis Herdeth'}){
+const Navbar = ({title = 'Luis Herdeth'})=>{
 return (
 	<nav className="navbar navbar-dark bg-dark">
 		<div className="container justify-content-center">

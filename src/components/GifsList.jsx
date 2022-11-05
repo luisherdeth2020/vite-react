@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
-import getNewState from './getNewGifsObjetc';
+import getNewGifsObjetc from './getNewGifsObjetc';
 
 const GifsList = () => {
 	const [gifs, getGifs] = useState([]);
 
 	useEffect(() => {
-		getNewState().then((gifs) => getGifs(gifs));
+		getNewGifsObjetc().then((gifs) => getGifs(gifs));
 	});
-    // console.log(gifs.image)
+	// console.log(gifs.image)
 
-    return (
+	return (
 		<div className="row">
-        {/* creamos una expresión de JS */}
+			{/* creamos una expresión de JS */}
 			{gifs.map((person, index) => (
 				<div key={index} className="col mb-4">
 					<div className="card" style={{ minWidth: '200px' }}>
@@ -19,7 +19,7 @@ const GifsList = () => {
 						<div className="card-body">
 							<h5 className="card-title">{person.title}</h5>
 							<hr />
-							<p>location: {person.location}</p>
+							<p>Location: {person.location}</p>
 						</div>
 					</div>
 				</div>
