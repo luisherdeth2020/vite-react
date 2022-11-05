@@ -1,18 +1,9 @@
-import { useState, useEffect } from 'react';
-import getNewGifsObjetc from './getNewGifsObjetc';
-
-const GifsList = () => {
-	const [gifs, getGifs] = useState([]);
-
-	useEffect(() => {
-		getNewGifsObjetc().then((gifs) => getGifs(gifs));
-	});
-	// console.log(gifs.image)
+const GifsList = ({listGifs}) => {
 
 	return (
 		<div className="row">
 			{/* creamos una expresión de JS */}
-			{gifs.map((person, index) => (
+			{listGifs.map((person, index) => (
 				<div key={index} className="col mb-4">
 					<div className="card" style={{ minWidth: '200px' }}>
 						<img src={person.url} alt={person.title} />

@@ -1,4 +1,6 @@
+import {useState} from 'react'
 const Pagination = ({ prev, next, onPrevious, onNext }) => {
+    
 	const handlePrevious = () => {
 		onPrevious();
 	};
