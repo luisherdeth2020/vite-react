@@ -1,26 +1,31 @@
 import { useState, useEffect } from 'react';
-import reactLogo from './assets/react.svg';
 import Navbar from './components/Navbar';
 import GifsList from './components/GifsList';
 import Pagination from './components/Pagination';
 
+const convertGifsArray = (array) => {
+	const newGifsArray = array.map((item) => ({
+		url: item.image,
+		title: item.name,
+		location: item.location.name,
+	}));
+	return newGifsArray;
+};
+
 function App() {
-	const [gifs, getGifs] = useState([]);
+	const [gifs, setGifs] = useState([]);
 	const [info, setInfo] = useState({});
-	function getNewGifsObjetc() {
-		const apiURL = 'https://rickandmortyapi.com/api/character';
+
+	const initialURL = 'https://rickandmortyapi.com/api/character';
+
+	function getNewGifsObjetc(apiURL) {
 		return fetch(apiURL)
 			.then((response) => response.json())
 			.then((resp) => {
 				const { results = [] } = resp;
-				// const {info =[]}=resp;
-				const gifs = results.map((personaje) => ({
-					url: personaje.image,
-					title: personaje.name,
-					location: personaje.location.name,
-				}));
+				const gifs = convertGifsArray(results);
 				setInfo(resp.info);
-				return gifs;
+				setGifs(gifs);
 			});
 	}
 
@@ -29,13 +34,11 @@ function App() {
 	};
 	const onNext = () => {
 		getNewGifsObjetc(info.next);
-		console.log(getNewGifsObjetc(info.next))
 	};
 
 	useEffect(() => {
-		getNewGifsObjetc().then((gifs) => getGifs(gifs));
-	});
-	// console.log(gifs.image)
+		getNewGifsObjetc(initialURL);
+	}, []);
 
 	return (
 		<>
@@ -43,7 +46,7 @@ function App() {
 			<div className="container mt-4">
 				<Pagination prev={info.prev} next={info.next} onPrevious={onPrevious} onNext={onNext} />
 				<GifsList listGifs={gifs} />
-				<Pagination prev={info.prev} next={info.next} />
+				<Pagination prev={info.prev} next={info.next} onPrevious={onPrevious} onNext={onNext} />
 			</div>
 		</>
 	);
