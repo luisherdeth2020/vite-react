@@ -1,23 +1,23 @@
-const Pagination = ({ prev, next, onPrevious, onNext }) => {
+const Pagination = ({ anterior, siguiente, anteriorUrl, siguienteUrl }) => {
 	const handlePrevious = () => {
-		onPrevious();
+		anteriorUrl();
 	};
 	const handleNext = () => {
-		onNext();
+		siguienteUrl();
 	};
 	return (
-		<nav>
+		<nav className="my-5">
 			<ul className="pagination justify-content-center">
-				{prev ? (
+				{anterior ? (
 					<li className="page-item">
-						<button className="page-link" onClick={handlePrevious}>
+						<button className="page-link me-1 rounded-3" onClick={handlePrevious}>
 							Previous
 						</button>
 					</li>
 				) : null}
-				{next ? (
+				{siguiente ? (
 					<li className="page-item">
-						<button className="page-link" onClick={handleNext}>
+						<button className="page-link ms-1 rounded-3" onClick={handleNext}>
 							Next
 						</button>
 					</li>

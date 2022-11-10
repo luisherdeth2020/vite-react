@@ -24,15 +24,15 @@ function App() {
 			.then((resp) => {
 				const { results = [] } = resp;
 				const gifs = convertGifsArray(results);
-				setInfo(resp.info);
 				setGifs(gifs);
+				setInfo(resp.info);
 			});
 	}
 
-	const onPrevious = () => {
+	const anteriorUrl = () => {
 		getNewGifsObjetc(info.prev);
 	};
-	const onNext = () => {
+	const siguienteUrl = () => {
 		getNewGifsObjetc(info.next);
 	};
 
@@ -43,10 +43,21 @@ function App() {
 	return (
 		<>
 			<Navbar title="Rick and Morty App" />
-			<div className="container mt-4">
-				<Pagination prev={info.prev} next={info.next} onPrevious={onPrevious} onNext={onNext} />
+
+			<div className="container">
+				<Pagination
+					anterior={info.prev}
+					siguiente={info.next}
+					anteriorUrl={anteriorUrl}
+					siguienteUrl={siguienteUrl}
+				/>
 				<GifsList listGifs={gifs} />
-				<Pagination prev={info.prev} next={info.next} onPrevious={onPrevious} onNext={onNext} />
+				<Pagination
+					anterior={info.prev}
+					siguiente={info.next}
+					anteriorUrl={anteriorUrl}
+					siguienteUrl={siguienteUrl}
+				/>
 			</div>
 		</>
 	);
